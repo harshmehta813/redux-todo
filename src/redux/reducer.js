@@ -1,17 +1,34 @@
 import { actionConstants } from "./actions";
 
 const initState = {
-  todos: [
-    {
-      id: 1,
-      status: true,
-      title: "BUY BREAD"
-    }
-  ]
+  todos: [],
+  isLoading: true,
+  isError: false
 };
 
 function reducer(state = initState, action) {
   switch (action.type) {
+    case actionConstants.GET_TODO_REQUEST: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+    case actionConstants.GET_TODO_SUCCESS: {
+      return {
+        ...state,
+        todos: action.payload.todos,
+        isLoading: false
+      };
+    }
+    case actionConstants.GET_TODO_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      };
+    }
+
     case actionConstants.ADD_TODO: {
       return { ...state, todos: [...state.todos, action.payload] };
     }
@@ -39,8 +56,3 @@ function reducer(state = initState, action) {
 }
 
 export default reducer;
-
-// 1. true
-// 2. false
-// 3. error
-// 4. others
