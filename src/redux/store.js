@@ -5,10 +5,22 @@ import appReducer from "./app/reducer";
 
 const rootReducer = combineReducers({ auth: authReducer, app: appReducer });
 
-export const store = createStore(rootReducer);
+export const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 console.log(store.getState());
+// * combine reducers
+// create app and auth folders
+// action, actionTypes, reducers
+// use combineReducers, to create a root reducer
+// refactor components which consume the store  values
+// useSelector(state=>state.auth.token)
+// useSelector(state=>state.app.todos)
+// fix import statements across all actions that we are importing
 
+// * setting up redux
 // create actions
 // create reducer
 // create store
@@ -17,10 +29,4 @@ console.log(store.getState());
 //  ---- pass it to required elements
 // dispatch an action depending on user input
 
-// create app and auth folders
-// action, actionTypes, reducers
-// use combineReducers, to create a root reducer
-// refactor components which consume the store  values
-// useSelector(state=>state.auth.token)
-// useSelector(state=>state.app.todos)
-// fix import statements across all actions that we are importing
+// * developer tools
