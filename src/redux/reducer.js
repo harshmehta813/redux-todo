@@ -1,13 +1,26 @@
+import { loadData, saveData } from "../utils/localStorage";
 import { actionConstants } from "./actions";
+
+const token = loadData("token") || null;
 
 const initState = {
   todos: [],
   isLoading: true,
-  isError: false
+  isError: false,
+  isAuth: token !== null,
+  token: token
 };
 
 function reducer(state = initState, action) {
   switch (action.type) {
+    case actionConstants.LOGIN_SUCCESS: {
+      saveData("token", action.payload.token);
+      return {
+        ...state,
+        isAuth: true,
+        token: action.payload.token
+      };
+    }
     case actionConstants.GET_TODO_REQUEST: {
       return {
         ...state,

@@ -5,7 +5,19 @@ export const actionConstants = {
   GET_TODO_FAILURE: "GET_TODO_FAILURE",
   ADD_TODO: "ADD_TODO",
   REMOVE_TODO_ITEM: "REMOVE_TODO_ITEM",
-  TOGGLE_TODO_STATUS: "TOGGLE_TODO_STATUS"
+  TOGGLE_TODO_STATUS: "TOGGLE_TODO_STATUS",
+  // REQUEST
+  LOGIN_SUCCESS: "LOGIN_SUCCESS"
+  // FAILURE
+};
+
+export const loginSuccess = (token) => {
+  return {
+    type: actionConstants.LOGIN_SUCCESS,
+    payload: {
+      token: token
+    }
+  };
 };
 
 export const getTodosRequest = () => {
