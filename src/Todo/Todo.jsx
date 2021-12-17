@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { addTodo } from "../redux/actions";
+import { addTodo } from "../redux/app/action";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
 
@@ -13,6 +13,9 @@ function Todo() {
       id: uuid()
     });
     dispatch(action);
+    // request
+    // success
+    // failure
   };
   return (
     <div>

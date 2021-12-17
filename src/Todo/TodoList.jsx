@@ -6,7 +6,7 @@ import {
   getTodosSuccess,
   removeTodo,
   toggleTodo
-} from "../redux/actions";
+} from "../redux/app/action";
 
 function TodoItem({ title, status, onDelete, id, onToggle }) {
   return (
@@ -21,7 +21,7 @@ function TodoItem({ title, status, onDelete, id, onToggle }) {
 
 function TodoList() {
   const { todos, isLoading, isError } = useSelector(
-    (state) => state,
+    (state) => state.app,
     shallowEqual
   );
   const dispatch = useDispatch();
