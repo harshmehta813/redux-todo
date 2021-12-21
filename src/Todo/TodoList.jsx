@@ -7,6 +7,7 @@ import {
   removeTodo,
   toggleTodo
 } from "../redux/app/action";
+import { getTodos } from "./api";
 
 function TodoItem({ title, status, onDelete, id, onToggle }) {
   return (
@@ -26,26 +27,9 @@ function TodoList() {
   );
   const dispatch = useDispatch();
 
-  const getTodos = () => {
-    // pre fetch
-    const requestAction = getTodosRequest();
-    dispatch(requestAction);
-    return fetch("https://json-server-mocker-masai.herokuapp.com/tasks")
-      .then((res) => res.json())
-      .then((res) => {
-        //success
-        const successAction = getTodosSuccess(res);
-        dispatch(successAction);
-      })
-      .catch((res) => {
-        // failure
-        const failureAction = getTodosFailure();
-        dispatch(failureAction);
-      });
-  };
-
   useEffect(() => {
-    getTodos();
+    // getTodos(dispatch);
+    dispatch(getTodos());
   }, []);
 
   const handleDelete = (id) => {
@@ -57,7 +41,7 @@ function TodoList() {
     const action = toggleTodo(id);
     dispatch(action);
   };
-
+  console.log(todos);
   return (
     <div>
       {isLoading && <h3>Loading...</h3>}

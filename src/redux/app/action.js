@@ -27,6 +27,24 @@ export const getTodosFailure = () => {
   };
 };
 
+export const getTodos = () => (dispatch) => {
+  // pre fetch
+  const requestAction = getTodosRequest();
+  dispatch(requestAction);
+  return fetch("https://json-server-mocker-masai.herokuapp.com/tasks")
+    .then((res) => res.json())
+    .then((res) => {
+      //success
+      const successAction = getTodosSuccess(res);
+      dispatch(successAction);
+    })
+    .catch((res) => {
+      // failure
+      const failureAction = getTodosFailure();
+      dispatch(failureAction);
+    });
+};
+
 export const addTodosRequest = () => {
   return {
     type: appConstants.ADD_TODO_REQUEST,
@@ -65,6 +83,32 @@ export const addTodo = ({ title, status, id }) => {
       id
     }
   };
+};
+
+export const addTodos = (text) => (dispatch) => {
+  const requestAction = addTodosRequest();
+  dispatch(requestAction);
+  return fetch("https://json-server-mocker-masai.herokuapp.com/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: text,
+      status: false
+    })
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      //success
+      const successAction = addTodosSuccess(res);
+      dispatch(successAction);
+    })
+    .catch((res) => {
+      // failure
+      const failureAction = addTodosFailure();
+      dispatch(failureAction);
+    });
 };
 
 export const removeTodo = (id) => ({

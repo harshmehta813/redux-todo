@@ -1,5 +1,6 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 // import reducer from "./reducer";
+import thunk from "redux-thunk";
 import authReducer from "./auth/reducer";
 import appReducer from "./app/reducer";
 
@@ -36,11 +37,17 @@ const networkRequestsMiddleware = (store) => (next) => (action) => {
 //   return "value";
 // };
 
-export const store = createStore(
-  rootReducer,
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  applyMiddleware(networkRequestsMiddleware)
-);
+let enhancers = compose;
+
+if (process.env.NODE_ENV !== "production") {
+  enhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
+}
+
+const enhancer = enhancers(applyMiddleware(thunk));
+
+export const store = createStore(rootReducer, enhancer);
 
 // loggerMiddleware(store)(nextMiddleware)(action)
 
