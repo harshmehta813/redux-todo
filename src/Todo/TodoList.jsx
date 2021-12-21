@@ -10,7 +10,7 @@ import {
 
 function TodoItem({ title, status, onDelete, id, onToggle }) {
   return (
-    <div className="todoItem">
+    <div style={{ display: "flex", padding: "1rem", gap: "2rem" }}>
       <div>{title}</div>
       <div>{`${status}`}</div>
       <button onClick={() => onDelete(id)}>Delete</button>

@@ -20,7 +20,8 @@ function reducer(state = initState, action) {
     case appConstants.GET_TODO_REQUEST: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        isError: false
       };
     }
     case appConstants.GET_TODO_SUCCESS: {
@@ -31,6 +32,26 @@ function reducer(state = initState, action) {
       };
     }
     case appConstants.GET_TODO_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      };
+    }
+    case appConstants.ADD_TODO_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      };
+    }
+    case appConstants.ADD_TODO_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+    case appConstants.ADD_TODO_FAILURE: {
       return {
         ...state,
         isLoading: false,

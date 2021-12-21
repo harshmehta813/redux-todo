@@ -27,6 +27,33 @@ export const getTodosFailure = () => {
   };
 };
 
+export const addTodosRequest = () => {
+  return {
+    type: appConstants.ADD_TODO_REQUEST,
+    payload: {
+      isLoading: true
+    }
+  };
+};
+
+export const addTodosSuccess = (todos) => {
+  return {
+    type: appConstants.ADD_TODO_SUCCESS,
+    payload: {
+      todos: todos
+    }
+  };
+};
+
+export const addTodosFailure = () => {
+  return {
+    type: appConstants.ADD_TODO_FAILURE,
+    payload: {
+      isError: true
+    }
+  };
+};
+
 // actionCreators
 // type is mandatory, string
 export const addTodo = ({ title, status, id }) => {
